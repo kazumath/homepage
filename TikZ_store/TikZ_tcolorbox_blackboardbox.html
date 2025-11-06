@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tcolorboxを使った黒板風の枠-kz's Home Page</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            // id="header-placeholder" の場所に header.html の内容を読み込む
+            $("#header-placeholder").load("../header.html");
+        });
+    </script>
+</head>
+<body>
+    <div id="header-placeholder"></div> 
+
+    <main class="container">
+        <h2>tcolorboxを使った黒板風の枠</h2>
+        <p>tcolorboxを使って黒板風の枠を作ってみました. 残念ながら改ページには対応していません_(._.)_</p>
+        <img src="blackboard.png" alt="blackboardbox" class="responsive-image"/>
+        <h2>コード</h2>
+    <p>以下がコードです. ご自由にお使いください. </p>
+    <div class="code-block">
+    <pre class="code">
+<span>\definecolor{blackboard}{HTML}{00552E}</span><span>\tcbset{</span><span>    blackboardbox/.style={</span><span>    enhanced,</span><span>    colupper=white!80!blackboard,</span><span>    collower=white!80!blackboard,</span><span>    colback=blackboard,</span><span>    coltitle=white!80!blackboard,</span><span>    colbacktitle=blackboard,</span><span>    colframe=blackboard,</span><span>    sharp corners,</span><span>    top=0mm,</span><span>    bottom=4mm,</span><span>    underlay={</span><span>    \draw[line width=2pt,gray!40!](frame.north east)rectangle(frame.south west);</span><span>    \filldraw[gray!40!]([xshift=-2pt]frame.south west)rectangle([xshift=2pt,yshift=-3pt]frame.south east);</span><span>    \filldraw[rounded corners=2pt,yellow!50!brown](frame.south east)rectangle++(-10mm,4mm);</span><span>    \draw[black,line width=1.4mm]([xshift=-5mm,yshift=4mm]frame.south east)--++(0,-4mm);   </span><span>    \draw[white!80!lightgray,line width=3pt]([xshift=-15mm]frame.south east)--++(-7mm,0);     </span><span>    },</span><span>}}</span>
+</div>
+    </main>
+    <footer>    
+    </footer>
+</body>
+</html>

@@ -1,0 +1,214 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;    
+    margin: 0;
+    padding: 0;
+    background-color: #FFF;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #0056b3; 
+}
+
+/* ヘッダー部分 */
+
+header {
+    background-color: #000;
+    color: #FFF;
+    padding: 15px 0;
+}
+
+header h1 {
+    margin-bottom: 5px;
+    margin-top: 0px;
+    font-size: 30px;
+    letter-spacing: 1px;
+}
+
+header h1 a {
+    color: #FFF;
+}
+
+header h1 a:hover {
+    color: #FFF;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+header nav a {
+    color: #FFF;
+    font-weight: bold;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+}
+
+header nav a:hover {
+    color: #61adff;
+    border-bottom: 2px solid #61adff;
+}
+
+main {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+h2, h3 {
+    color: #111;
+    border-bottom: 2px solid #EEE;
+    padding-bottom: 5px;
+    margin-top: 30px;
+}
+
+.hero {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.name-affiliation {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.message {
+    border: 2px solid #EEE;
+    border-radius: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #007BFF;
+    color: #FFF !important;
+    padding: 10px 25px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+    border-bottom: none; 
+}
+
+.link-list {
+    list-style: none;
+    padding: 0;
+}
+
+.position {
+    padding-left: 0px;
+    text-align: left;
+}
+
+.position li{
+    padding: 3px 3px;
+}
+
+.position a { 
+    color: #000;
+    text-decoration: underline;
+}
+
+.link-list li {
+    margin-bottom: 10px;
+    border-left: 3px solid #007BFF;
+    padding-left: 10px;
+}
+
+footer {
+    background-color: #111;
+    color: #AAA;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 0.8em;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #DDD;
+    margin: 40px 0;
+}
+
+.responsive-image {
+    width: 100%; 
+    max-width: 600px; 
+    display: block;
+    margin: 0 auto;
+    height: auto; /* 縦横比を維持 */
+}
+
+/* 黒板風 */
+div.kokuban {
+position: relative;
+margin: 2em auto;
+padding: 1em;
+width: 70%; /* ボックス幅 */
+background: #006633; /* ボックス背景色 */
+color: #fff; /* 文章色 */
+border: 3px solid #C0C0C0; /* 枠線 */
+border-radius: 2px; /* 角の丸み */
+}
+.kokuban::before, .kokuban::after {
+position: absolute;
+content: ''; bottom: 0;
+}
+.kokuban::before {
+width: 20px;
+right: 10px;
+border: solid 3px #ff42a0; /*チョークピンク */
+border-radius: 3px 2px 0 2px;
+}
+.kokuban::after {
+width: 15px;
+right: 45px;
+border: solid 3px #fff; /*チョーク白 */
+border-radius: 8px 5px 2px 5px;
+}
+
+/* コードブロック */
+.code {
+  font-size: 0.75em;
+  border: 5px solid #AAA;
+  overflow-x: auto;
+  margin: 5cqb;
+  color: #FFF;
+  background-color: #000;
+  font-family: 'Consolas', 'Courier New', monospace;
+  counter-reset: line-number;
+}
+
+.code span {
+  counter-increment: line-number;
+  display: list-item; 
+  padding-left: 1rem;
+  margin-left: 2rem;
+}
+
+.code span::marker {
+  content: counter(line-number);
+  color: #aaa;
+}

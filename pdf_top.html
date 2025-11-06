@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pdf置き場-kz's Home Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="codeblock.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            // id="header-placeholder" の場所に header.html の内容を読み込む
+            $("#header-placeholder").load("header.html");
+        });
+    </script>
+</head>
+<body>
+    <div id="header-placeholder"></div> 
+
+    <main class="container">
+        <section id="latex-memos">
+            <h2>pdf置き場</h2>
+            <p>
+                このページには今まで作ったpdfが並びます. よければ見ていってください. 
+            </p>
+            <ul>
+                <li><a href="pdf_store/homology.pdf" target="_blank">単体複体のホモロジー群</a>
+                    <p>フレセミの発表用に作ったスライドです.</p></li>
+                <li><a href="pdf_store/alg-topology.pdf" target="_blank">代数的トポロジーの基礎</a>
+                    <p>夏休みに自主ゼミをしたときのメモ用のpdfです. ところどころ穴があります(-_-;)</p></li>
+                <li><a href="pdf_store/SymmetricGroup.pdf" target="_blank">対称群の表現論</a>
+                    <p>数学演習IXでの内容が一部まとめてあります. </p></li>
+                <li><a href="pdf_store/assignment_ODE.pdf" target="_blank">解析学要論Iレポート問題</a>
+                    <p>頑張って解きましたがおそらくどこかが間違っていたり, 議論が甘かったりしてます(点数もらえなかったので...)</p></li>
+                <li><a href="pdf_store/Burnside.pdf" target="_blank">Burnsideの補題の順列への応用</a>
+                    <p>本当に何のために作ったのかわからないスライドです. </p></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+    
+    </footer>
+</body>
+</html>

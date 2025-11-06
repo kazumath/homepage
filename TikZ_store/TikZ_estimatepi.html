@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeXでモンテカルロ法-kz's Home Page</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            // id="header-placeholder" の場所に header.html の内容を読み込む
+            $("#header-placeholder").load("../header.html");
+        });
+    </script>
+</head>
+<body>
+    <div id="header-placeholder"></div> 
+
+    <main class="container">
+        <h2>TeXでモンテカルロ法</h2>
+        <p>LaTeXでモンテカルロ法を実行して, TikZで結果を可視化できるようにしました. 乱数を用いているのでコンパイル毎に結果が変わります. </p>
+        <p>下の写真はN=5000のときの結果の例です. </p>
+        <img src="estimatepi.png" alt="estimatepi" class="responsive-image"/>
+        <h2>コード</h2>
+    <p>以下がコードです. ご自由にお使いください. </p>
+    <div class="code-block">
+    <pre class="code">
+<span>\newcounter{n}</span><span>\newcounter{est}</span><span>\newcounter{N}</span><span>\setcounter{est}{0}</span><span>\setcounter{n}{0}</span><span>\setcounter{N}{5000}</span><span></span><span>\centering</span><span></span><span>\begin{tikzpicture}[scale=4]</span><span>  \draw[-latex](0,0)--(1.2,0);</span><span>  \draw[-latex](0,0)--(0,1.2);</span><span>  \draw(1,0)arc[start angle=0, end angle=90, radius=1];</span><span></span><span>  \loop</span><span>  \pgfmathsetmacro{\x}{rnd} </span><span>  \pgfmathsetmacro{\y}{rnd}</span><span>  \pgfmathparse{ifthenelse(\x^2+\y^2<1,1,0)}</span><span>  \ifnum  \pgfmathresult = 1</span><span>    \fill[red] (\x,\y)circle(0.005);</span><span>    \stepcounter{n}</span><span>  \else</span><span>    \fill (\x,\y)circle(0.005);</span><span>  \fi</span><span>  \stepcounter{est}</span><span>  \ifnum\value{est}<\value{N} \repeat</span><span>\end{tikzpicture}</span><span></span><span>\pgfmathparse{4*\value{n}/\value{N}}</span><span></span><span>円の中の点の数は\theN 個中\then 個. よって</span><span></span><span>$\displaystyle\pi\approx 4\times\frac{\then}{\theN}=\pgfmathresult$</span>
+</div>
+    </main>
+    <footer>    
+    </footer>
+</body>
+</html>
