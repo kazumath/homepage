@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeXでモンテカルロ法-kz's Home Page</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../SNSshere.js"></script>
     <script>
         $(function(){
             // id="header-placeholder" の場所に header.html の内容を読み込む
@@ -27,6 +29,35 @@
     <pre class="code">
 <span>\newcounter{n}</span><span>\newcounter{est}</span><span>\newcounter{N}</span><span>\setcounter{est}{0}</span><span>\setcounter{n}{0}</span><span>\setcounter{N}{5000}</span><span></span><span>\centering</span><span></span><span>\begin{tikzpicture}[scale=4]</span><span>  \draw[-latex](0,0)--(1.2,0);</span><span>  \draw[-latex](0,0)--(0,1.2);</span><span>  \draw(1,0)arc[start angle=0, end angle=90, radius=1];</span><span></span><span>  \loop</span><span>  \pgfmathsetmacro{\x}{rnd} </span><span>  \pgfmathsetmacro{\y}{rnd}</span><span>  \pgfmathparse{ifthenelse(\x^2+\y^2<1,1,0)}</span><span>  \ifnum  \pgfmathresult = 1</span><span>    \fill[red] (\x,\y)circle(0.005);</span><span>    \stepcounter{n}</span><span>  \else</span><span>    \fill (\x,\y)circle(0.005);</span><span>  \fi</span><span>  \stepcounter{est}</span><span>  \ifnum\value{est}<\value{N} \repeat</span><span>\end{tikzpicture}</span><span></span><span>\pgfmathparse{4*\value{n}/\value{N}}</span><span></span><span>円の中の点の数は\theN 個中\then 個. よって</span><span></span><span>$\displaystyle\pi\approx 4\times\frac{\then}{\theN}=\pgfmathresult$</span>
 </div>
+    <div class="share-buttons">
+    <h3>この記事を共有する</h3>
+    <ul>
+        <li>
+        <a id="share-twitter" href="#" class="share-btn twitter" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-x-twitter"></i>
+            <span>Xでシェア</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-facebook" href="#" class="share-btn facebook" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-facebook-f"></i>
+            <span>Facebook</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-line" href="#" class="share-btn line" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-line"></i>
+            <span>LINE</span>
+        </a>
+        </li>
+        <li>
+        <button id="copy-url" class="share-btn copy">
+            <i class="fa-solid fa-link"></i>
+            <span>URLをコピー</span>
+        </button>
+        </li>
+    </ul>
+    </div>
     </main>
     <footer>    
     </footer>

@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TikZで六角柱を書く-kz's Home Page</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../SNSshere.js"></script>
     <script>
         $(function(){
             // id="header-placeholder" の場所に header.html の内容を読み込む
@@ -27,6 +29,35 @@
     <pre class="code">
 <span>\newcommand{\hexprism}[2]{</span><span>\tdplotsetmaincoords{#1}{#2}</span><span>\colorlet{maincolor}{white}%線の色</span><span>\begin{tikzpicture}[</span><span>tdplot_main_coords,</span><span>axis/.style={-stealth},</span><span>mainline/.style={maincolor,very thick,line join=bevel},</span><span>invisibleline/.style={maincolor,densely dashed},</span><span>]</span><span></span><span>\pgfmathsetmacro{\r}{1}</span><span>\pgfmathsetmacro{\h}{4}</span><span>    </span><span>\foreach \P/\ang in{A/0,B/60,C/120,D/180,E/240,F/300}</span><span>\coordinate (\P b) at (\ang:\r);</span><span></span><span>\foreach \P/\ang in{A/0,B/60,C/120,D/180,E/240,F/300}</span><span>\coordinate (\P t) at ({\r*cos(\ang)},{\r*sin(\ang)},\h);</span><span></span><span>\foreach \P in{A,B,C,D,E,F}</span><span>{\node[maincolor!50!gray] at(\P t){\scriptsize \P t};</span><span>\node[maincolor!50!gray] at(\P b){\scriptsize \P b};</span><span>}</span><span></span><span>\tikzset{</span><span>  ABrec/.style={insert path={(Ab)--(Bb)--(Bt)--(At)--cycle}},</span><span>  BCrec/.style={insert path={(Bb)--(Cb)--(Ct)--(Bt)--cycle}},</span><span>  CDrec/.style={insert path={(Cb)--(Db)--(Dt)--(Ct)--cycle}},</span><span>  DErec/.style={insert path={(Db)--(Eb)--(Et)--(Dt)--cycle}},</span><span>  EFrec/.style={insert path={(Eb)--(Fb)--(Ft)--(Et)--cycle}}, </span><span>  FArec/.style={insert path={(Fb)--(Ab)--(At)--(Ft)--cycle}},</span><span>}</span><span></span><span>% camera vector: ({sin(\tdplotmaintheta)*sin(\tdplotmainphi)},{-sin(\tdplotmaintheta)*cos(\tdplotmainphi)},{cos(\tdplotmaintheta)})</span><span>% inner product</span><span>%側面</span><span>\pgfmathparse{cos(30)*sin(\tdplotmaintheta)*sin(\tdplotmainphi)-sin(30)*sin(\tdplotmaintheta)*cos(\tdplotmainphi) >= 0}</span><span>\pgfmathsetmacro{\ABprod}{\pgfmathresult}</span><span>\pgfmathparse{cos(90)*sin(\tdplotmaintheta)*sin(\tdplotmainphi)-sin(90)*sin(\tdplotmaintheta)*cos(\tdplotmainphi) >= 0}</span><span>\pgfmathsetmacro{\BCprod}{\pgfmathresult}</span><span>\pgfmathparse{cos(150)*sin(\tdplotmaintheta)*sin(\tdplotmainphi)-sin(150)*sin(\tdplotmaintheta)*cos(\tdplotmainphi) >= 0}</span><span>\pgfmathsetmacro{\CDprod}{\pgfmathresult}</span><span>\pgfmathparse{cos(210)*sin(\tdplotmaintheta)*sin(\tdplotmainphi)-sin(210)*sin(\tdplotmaintheta)*cos(\tdplotmainphi) >= 0}</span><span>\pgfmathsetmacro{\DEprod}{\pgfmathresult}</span><span>\pgfmathparse{cos(270)*sin(\tdplotmaintheta)*sin(\tdplotmainphi)-sin(270)*sin(\tdplotmaintheta)*cos(\tdplotmainphi) >= 0}</span><span>\pgfmathsetmacro{\EFprod}{\pgfmathresult}</span><span>\pgfmathparse{cos(330)*sin(\tdplotmaintheta)*sin(\tdplotmainphi)-sin(330)*sin(\tdplotmaintheta)*cos(\tdplotmainphi) >= 0}</span><span>\pgfmathsetmacro{\FAprod}{\pgfmathresult}</span><span></span><span>%底面</span><span>\pgfmathparse{cos(\tdplotmaintheta) >= 0}</span><span>\pgfmathsetmacro{\topprod}{\pgfmathresult}</span><span></span><span>\ifthenelse{</span><span>    \topprod=1</span><span>}{\draw[mainline](At)--(Bt)--(Ct)--(Dt)--(Et)--(Ft)--cycle;</span><span>    \ifthenelse{\ABprod=1 \and \BCprod=1 \and \CDprod=1}{</span><span>        \draw[invisibleline](Db)--(Eb)--(Fb)--(Ab); \draw[invisibleline](Eb)--(Et) (Fb)--(Ft); </span><span>        \draw[mainline,ABrec];\draw[mainline,BCrec];\draw[mainline,CDrec];</span><span>    }{ \ifthenelse{\BCprod=1 \and \CDprod=1 \and \DEprod=1}{</span><span>        \draw[invisibleline](Eb)--(Fb)--(Ab)--(Bb); \draw[invisibleline](Fb)--(Ft) (Ab)--(At); </span><span>        \draw[mainline,BCrec];\draw[mainline,CDrec];\draw[mainline,DErec]; </span><span>    }{\ifthenelse{\CDprod=1 \and \DEprod=1 \and \EFprod=1}{</span><span>        \draw[invisibleline](Fb)--(Ab)--(Bb)--(Cb); \draw[invisibleline](Ab)--(At) (Bb)--(Bt); </span><span>        \draw[mainline,CDrec];\draw[mainline,DErec];\draw[mainline,EFrec]; </span><span>    }{\ifthenelse{\DEprod=1 \and \EFprod=1 \and \FAprod=1}{</span><span>        \draw[invisibleline](Ab)--(Bb)--(Cb)--(Db); \draw[invisibleline](Bb)--(Bt) (Cb)--(Ct); </span><span>        \draw[mainline,DErec];\draw[mainline,EFrec];\draw[mainline,FArec]; </span><span>    }{\ifthenelse{\EFprod=1 \and \FAprod=1 \and \ABprod=1}{</span><span>        \draw[invisibleline](Bb)--(Cb)--(Db)--(Eb); \draw[invisibleline](Cb)--(Ct) (Db)--(Dt); </span><span>        \draw[mainline,EFrec];\draw[mainline,FArec];\draw[mainline,ABrec]; </span><span>    }{\ifthenelse{\FAprod=1 \and \ABprod=1 \and \BCprod=1}{</span><span>        \draw[invisibleline](Cb)--(Db)--(Eb)--(Fb); \draw[invisibleline](Db)--(Dt) (Eb)--(Et);  </span><span>        \draw[mainline,FArec];\draw[mainline,ABrec];\draw[mainline,BCrec];</span><span>    }{}}}}}}</span><span>}{\draw[mainline](Ab)--(Bb)--(Cb)--(Db)--(Eb)--(Fb)--cycle;</span><span>    \ifthenelse{\ABprod=1 \and \BCprod=1 \and \CDprod=1}{</span><span>        \draw[invisibleline](Dt)--(Et)--(Ft)--(At); \draw[invisibleline](Eb)--(Et) (Fb)--(Ft); </span><span>        \draw[mainline,ABrec];\draw[mainline,BCrec];\draw[mainline,CDrec];</span><span>    }{ \ifthenelse{\BCprod=1 \and \CDprod=1 \and \DEprod=1}{</span><span>        \draw[invisibleline](Et)--(Ft)--(At)--(Bt); \draw[invisibleline](Fb)--(Ft) (Ab)--(At); </span><span>        \draw[mainline,BCrec];\draw[mainline,CDrec];\draw[mainline,DErec]; </span><span>    }{\ifthenelse{\CDprod=1 \and \DEprod=1 \and \EFprod=1}{</span><span>        \draw[invisibleline](Ft)--(At)--(Bt)--(Ct); \draw[invisibleline](Ab)--(At) (Bb)--(Bt); </span><span>        \draw[mainline,CDrec];\draw[mainline,DErec];\draw[mainline,EFrec]; </span><span>    }{\ifthenelse{\DEprod=1 \and \EFprod=1 \and \FAprod=1}{</span><span>        \draw[invisibleline](At)--(Bt)--(Ct)--(Dt); \draw[invisibleline](Bb)--(Bt) (Cb)--(Ct); </span><span>        \draw[mainline,DErec];\draw[mainline,EFrec];\draw[mainline,FArec]; </span><span>    }{\ifthenelse{\EFprod=1 \and \FAprod=1 \and \ABprod=1}{</span><span>        \draw[invisibleline](Bt)--(Ct)--(Dt)--(Et); \draw[invisibleline](Cb)--(Ct) (Db)--(Dt); </span><span>        \draw[mainline,EFrec];\draw[mainline,FArec];\draw[mainline,ABrec]; </span><span>    }{\ifthenelse{\FAprod=1 \and \ABprod=1 \and \BCprod=1}{</span><span>        \draw[invisibleline](Ct)--(Dt)--(Et)--(Ft); \draw[invisibleline](Db)--(Dt) (Eb)--(Et);  </span><span>        \draw[mainline,FArec];\draw[mainline,ABrec];\draw[mainline,BCrec];</span><span>    }{}}}}}}</span><span>}</span><span>\end{tikzpicture}</span><span>}</span>
 </div>
+    <div class="share-buttons">
+    <h3>この記事を共有する</h3>
+    <ul>
+        <li>
+        <a id="share-twitter" href="#" class="share-btn twitter" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-x-twitter"></i>
+            <span>Xでシェア</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-facebook" href="#" class="share-btn facebook" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-facebook-f"></i>
+            <span>Facebook</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-line" href="#" class="share-btn line" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-line"></i>
+            <span>LINE</span>
+        </a>
+        </li>
+        <li>
+        <button id="copy-url" class="share-btn copy">
+            <i class="fa-solid fa-link"></i>
+            <span>URLをコピー</span>
+        </button>
+        </li>
+    </ul>
+    </div>
     </main>
     <footer>    
     </footer>

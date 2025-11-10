@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>メモ帳風のtcolorboxによる枠-kz's Home Page</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../SNSshere.js"></script>
     <script>
         $(function(){
             // id="header-placeholder" の場所に header.html の内容を読み込む
@@ -25,6 +27,36 @@
     <div class="code-block">
     <pre class="code">
 <span>\tikzset{memoframe/.style={gray,line width=1.5pt}}</span><span>\newtcolorbox{memobox}[1]{</span><span>    enhanced,breakable,</span><span>    attach boxed title to top left={xshift=5mm,yshift=-\tcboxedtitleheight/2},</span><span>    boxed title style={</span><span>        enhanced,</span><span>        empty,</span><span>        sharp corners,</span><span>    },</span><span>    toprule=\tcboxedtitleheight/2,</span><span>    empty,title=#1,</span><span>    sharp corners,</span><span>    drop shadow=teal!50!gray,</span><span>    fonttitle=\bfseries,coltitle=teal!70!gray,</span><span>    underlay boxed title={</span><span>    \begin{scope}\clip ([xshift=-2pt]frame.north west) rectangle (frame.south east);</span><span>    %%背景の方眼</span><span>        \fill[white](frame.south west)rectangle(frame.north east);</span><span>        \foreach \x in {0.5,1,...,30} {</span><span>          \draw[cyan!20, opacity=0.6, line width=3pt] (\x,0) -- (\x,30);</span><span>        }</span><span>        \foreach \y in {0.5,1,...,30} {</span><span>          \draw[cyan!20, opacity=0.6, line width=3pt] (0,\y) -- (30,\y);</span><span>        }</span><span>    %%穴をあける</span><span>        \draw[memoframe,</span><span>        postaction={</span><span>            decorate,</span><span>            decoration={</span><span>            markings,</span><span>            mark=between positions 0.03 and 0.97 step 15pt with {</span><span>                \draw[white, line width=3pt] (0,0)--(4pt*1.41,0);</span><span>                \filldraw[fill=white](0,0) arc[start angle=180+45,end angle=-45,radius=4pt];</span><span>            }</span><span>            }</span><span>        }</span><span>        ] (frame.north west) -- (frame.south west);</span><span>    \end{scope}</span><span>    \draw[memoframe](frame.south west)--(frame.south east)--(frame.north east)--(frame.north west);</span><span>    \filldraw[thick,gray!60!white,fill=white](title.south west)--([xshift=-10pt]title.south east)</span><span>    to[out=0,in=-160]++(10pt,2pt)--++(0,\tcboxedtitleheight)</span><span>    to[out=-160,in=0]([xshift=-10pt]title.north east)--(title.north west)--cycle;</span><span>    \filldraw[teal!70!gray]([xshift=-2pt]title.south west)rectangle++(5pt,\tcboxedtitleheight);</span><span>    },</span><span>}</span></pre>
+    </div>
+
+    <div class="share-buttons">
+    <h3>この記事を共有する</h3>
+    <ul>
+        <li>
+        <a id="share-twitter" href="#" class="share-btn twitter" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-x-twitter"></i>
+            <span>Xでシェア</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-facebook" href="#" class="share-btn facebook" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-facebook-f"></i>
+            <span>Facebook</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-line" href="#" class="share-btn line" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-line"></i>
+            <span>LINE</span>
+        </a>
+        </li>
+        <li>
+        <button id="copy-url" class="share-btn copy">
+            <i class="fa-solid fa-link"></i>
+            <span>URLをコピー</span>
+        </button>
+        </li>
+    </ul>
     </div>
     </main>
     <footer>    

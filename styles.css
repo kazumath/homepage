@@ -288,3 +288,83 @@ a.card-link {
         width: calc(96% / 3);
     }
 }
+
+/* 共有ボタン全体のコンテナ */
+.share-buttons {
+  width: 100%;
+  max-width: 500px; /* 最大幅 */
+  margin: 20px auto;
+  text-align: center;
+}
+
+.share-buttons h3 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* ボタンリスト */
+.share-buttons ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* ボタンを横並びにする */
+  gap: 10px; /* ボタン間の隙間 */
+  justify-content: center; /* 中央揃え */
+}
+
+/* 各ボタンの共通スタイル */
+.share-btn,
+#copy-url {
+  display: inline-flex; /* アイコンとテキストを中央揃え */
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  transition: opacity 0.3s ease;
+  border: none; /* button要素のリセット */
+  cursor: pointer;
+}
+
+.share-btn:hover,
+#copy-url:hover {
+  opacity: 0.8;
+  color: white;
+}
+
+/* アイコンとテキストの間の隙間 */
+.share-btn i,
+#copy-url i {
+  margin-right: 8px;
+}
+
+/* ----- 各SNSのブランドカラー ----- */
+
+/* X (Twitter) */
+.share-btn.twitter {
+  background-color: #000
+}
+
+/* Facebook */
+.share-btn.facebook {
+  background-color: #1877F2;
+}
+
+/* LINE */
+.share-btn.line {
+  background-color: #06C755;
+}
+
+/* URLコピー */
+.share-btn.copy {
+  background-color: #777;
+}
+
+/* コピー完了時のスタイル（JSで追加/削除） */
+.share-btn.copy.copied {
+  background-color: #28a745; /* 緑色に変更 */
+}
