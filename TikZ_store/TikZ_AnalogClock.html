@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikZでアナログ時計-kz's Home Page</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../SNSshere.js"></script>
+    <script>
+        $(function(){
+            // id="header-placeholder" の場所に header.html の内容を読み込む
+            $("#header-placeholder").load("../header.html");
+        });
+    </script>
+</head>
+<body>
+    <div id="header-placeholder"></div> 
+
+    <main class="container">
+        <h2>TikZでアナログ時計</h2>
+        <p>TikZでアナログ時計を書きました. コンパイルごとに現在時刻を取得してアナログ時計が描画されます(コンパイルはplatexで行ってください). アラビア数字とローマ数字の2種類を作りました. </p>
+        <img src="analogclock.png" alt="アナログ時計" class="responsive-image" style="width: 70%;"/>
+        <h2>コード</h2>
+    <p>以下がコードです. ご自由にお使いください. </p>
+    <div class="code-block">
+    <pre class="code">
+<span>\tikzset{</span><span>  analog clock/.pic={</span><span>      % パラメータ</span><span>      \def\hr{\the\hour}</span><span>      \def\mn{\the\minute}</span><span>      \pgfmathsetmacro{\minuteAngle}{90 - \mn * 6}</span><span>      \pgfmathsetmacro{\hourAngle}{90 - ( (mod(\hr, 12)) + \mn / 60 ) * 30}</span><span></span><span>      \def\clockRadius{3} % 時計の半径</span><span></span><span></span><span>      %針</span><span>      \begin{scope}[line cap=round]</span><span>        \draw[line width=5pt] (0,0)--(\hourAngle:{\clockRadius*0.5}); </span><span>        \draw[line width=3pt] (0,0)--(\minuteAngle:{\clockRadius*0.7});</span><span>      \end{scope}</span><span></span><span></span><span>      %外枠</span><span>      \begin{scope}</span><span>        \draw[double] (0,0) circle (\clockRadius);</span><span>        \filldraw[gray] (0,0) circle (0.02*\clockRadius);</span><span>        \node at(0,-\clockRadius*0.5) {\today};</span><span>        \foreach \i in {1,2,...,12}{</span><span>        \node at ({90-\i*30}:{\clockRadius*0.9}) {\Large\bfseries\i};</span><span>        }</span><span>      \end{scope}</span><span>  },</span><span>  analog clock roman/.pic={</span><span>      % パラメータ</span><span>      \def\hr{\the\hour}</span><span>      \def\mn{\the\minute}</span><span>      \pgfmathsetmacro{\minuteAngle}{90 - \mn * 6}</span><span>      \pgfmathsetmacro{\hourAngle}{90 - ( (mod(\hr, 12)) + \mn / 60 ) * 30}</span><span></span><span>      \def\clockRadius{3} % 時計の半径</span><span></span><span></span><span>      %針</span><span>      \begin{scope}[line cap=round]</span><span>        \draw[line width=5pt] (0,0)--(\hourAngle:{\clockRadius*0.5}); </span><span>        \draw[line width=3pt] (0,0)--(\minuteAngle:{\clockRadius*0.7});</span><span>      \end{scope}</span><span></span><span></span><span>      %外枠</span><span>      \begin{scope}</span><span>        \draw[double] (0,0) circle (\clockRadius);</span><span>        \filldraw[gray] (0,0) circle (0.02*\clockRadius);</span><span>        \node at(0,-\clockRadius*0.5) {\today};</span><span>        \foreach \i in {1,2,...,12}{</span><span>        \pgfmathsetmacro{\ang}{\i*30}</span><span>        \node at (90-\ang:{\clockRadius*0.9}) {\rotatebox{-\ang}{\large\bfseries\uppercase\expandafter{\romannumeral \i \relax}}};</span><span>        }</span><span>      \end{scope}</span><span>  }</span><span>}</span><span></span><span>\centering</span><span>\begin{tikzpicture}</span><span>  \pic at (0,0) {analog clock};</span><span>  \pic at (7,0) {analog clock roman};</span><span>\end{tikzpicture}</span>
+</div>
+    <div class="share-buttons">
+    <h3>この記事を共有する</h3>
+    <ul>
+        <li>
+        <a id="share-twitter" href="#" class="share-btn twitter" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-x-twitter"></i>
+            <span>Xでシェア</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-facebook" href="#" class="share-btn facebook" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-facebook-f"></i>
+            <span>Facebook</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-line" href="#" class="share-btn line" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-line"></i>
+            <span>LINE</span>
+        </a>
+        </li>
+        <li>
+        <button id="copy-url" class="share-btn copy">
+            <i class="fa-solid fa-link"></i>
+            <span>URLをコピー</span>
+        </button>
+        </li>
+    </ul>
+    </div>
+    </main>
+    <footer>    
+    </footer>
+</body>
+</html>
