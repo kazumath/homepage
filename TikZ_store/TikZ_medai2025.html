@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名古屋大学 理系数学2025-kz's Home Page</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            // id="header-placeholder" の場所に header.html の内容を読み込む
+            $("#header-placeholder").load("../header.html");
+        });
+    </script>
+</head>
+<body>
+    <div id="header-placeholder"></div> 
+
+    <main class="container">
+        <h2>名古屋大学 理系数学2025</h2>
+        <p>TikZ-3dplotで名古屋大学 理系数学2025の問題の図をかきました. </p>
+        <p>良ければ<a href="https://texample.net/rotatedsphere/">TeXample</a>もご覧ください.</p>
+        <img src="medai2025.png" alt="名古屋大学 理系数学2025" class="responsive-image"/>
+        <h2>コード</h2>
+    <p>以下がコードです. ご自由にお使いください. </p>
+    <div class="code-block">
+    <pre class="code">
+<span>%\usetikzlibrary{calc,backgrounds}</span><span>\tdplotsetmaincoords{60}{140}</span><span>\begin{tikzpicture}[</span><span>    tdplot_main_coords,</span><span>    scale=3,</span><span>    axis/.style={-stealth},</span><span>    addline/.style={very thin}</span><span>]</span><span></span><span>    \begin{scope}[axis]</span><span>        \draw (0,0,0) -- (1.5,0,0) node[below]{$x$};</span><span>        \draw (0,0,0) -- (0,1.5,0) node[right]{$y$};</span><span>        \draw (0,0,-0.5) -- (0,0,0.7) node[right]{$z$};</span><span>    \end{scope}</span><span></span><span>    \def\r{0.3} % radius of sphere</span><span>    \def\a{70} % rotation angle</span><span></span><span>    \coordinate (A) at (1,0,0);</span><span>    \coordinate (B) at ({cos(\a)},{sin(\a)},0);</span><span>    \foreach \P/\Ptop/\Pbottom in {A/Atop/Abottom, B/Btop/Bbottom} {</span><span>        \coordinate (\Ptop) at ($(\P)+(0,0,\r)$);</span><span>        \coordinate (\Pbottom) at ($(\P)+(0,0,-\r)$);</span><span>    }</span><span></span><span>    % rotation angle</span><span>    \fill[red, opacity=0.6] (0.2,0) node[above]{$\alpha$} </span><span>        arc [radius=0.2, start angle=0, end angle=\a] -- (0,0,0) -- cycle;</span><span></span><span>    % draw additional line</span><span>    \begin{scope}[addline]</span><span>        \draw (A) circle (\r);</span><span>        \draw (B) circle (\r);</span><span>        \foreach \h in {-\r,0,\r}</span><span>            \draw (1,0,\h) arc [radius=1, start angle=0, end angle=\a] -- (0,0,\h) -- cycle;</span><span>        </span><span>        \tdplotsetrotatedcoords{\a-90}{90}{0}</span><span>        \tdplotdrawarc[tdplot_rotated_coords]{(B)}{\r}{0}{360}{}{}</span><span>        </span><span>        \tdplotsetrotatedcoords{90}{90}{0}</span><span>        \tdplotdrawarc[tdplot_rotated_coords]{(A)}{\r}{0}{360}{}{}</span><span>    \end{scope}</span><span></span><span>    %point and sphere</span><span>    \begin{scope}[tdplot_screen_coords, on background layer]</span><span>        \fill[ball color=lightgray!20!] (A) circle (\r); </span><span>        \fill[ball color=lightgray!20!] (B) circle (\r); </span><span>        \foreach \P in {A,B,Atop,Btop,Abottom,Bbottom}</span><span>            \fill (\P) circle (0.01);</span><span>    \end{scope}</span><span>\end{tikzpicture}</span>
+</div>
+    </main>
+    <footer>    
+    </footer>
+</body>
+</html>
