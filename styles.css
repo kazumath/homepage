@@ -369,8 +369,8 @@ a.card-link {
   background-color: #28a745; /* 緑色に変更 */
 }
 
-/* 画面幅が 500px 以下の場合 */
-@media (max-width: 500px) {
+/* 画面幅が 550px 以下の場合 */
+@media (max-width: 550px) {
   
   /* ボタンのテキストを非表示にする */
   .share-btn span,
