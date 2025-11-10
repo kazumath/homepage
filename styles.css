@@ -368,3 +368,25 @@ a.card-link {
 .share-btn.copy.copied {
   background-color: #28a745; /* 緑色に変更 */
 }
+
+/* 画面幅が 500px 以下の場合 */
+@media (max-width: 500px) {
+  
+  /* ボタンのテキストを非表示にする */
+  .share-btn span,
+  #copy-url span {
+    display: none;
+  }
+  
+  /* アイコンとテキストの間の余白をなくす */
+  .share-btn i,
+  #copy-url i {
+    margin-right: 0;
+  }
+  
+  /* ボタンの横幅をアイコンに合わせる（少し正方形に近くする） */
+  .share-btn,
+  #copy-url {
+    padding: 10px 12px;
+  }
+}
