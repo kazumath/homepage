@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tcolorboxで高級感のある枠-kz's Home Page</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../SNSshere.js"></script>
+    <script>
+        $(function(){
+            // id="header-placeholder" の場所に header.html の内容を読み込む
+            $("#header-placeholder").load("../header.html");
+        });
+    </script>
+</head>
+<body>
+    <div id="header-placeholder"></div> 
+
+    <main class="container">
+        <h2>tcolorboxで高級感のある枠</h2>
+        <p>tcolorboxを使った枠です. 残念ながら改ページには対応していません_(._.)_</p>
+        <img src="goldbox.png" alt="goldbox" class="responsive-image"/>
+        <h2>コード</h2>
+    <p>以下がコードです. ご自由にお使いください. </p>
+    <div class="code-block">
+    <pre class="code">
+<span>\tcbset{</span><span>    goldbox/.style={</span><span>        empty,</span><span>        toptitle=6pt,</span><span>        bottomtitle=-5pt,</span><span>        halign title=center,</span><span>        colupper=white,</span><span>        collower=white,</span><span>        before skip balanced=1.2\baselineskip,</span><span>        after skip balanced=1.2\baselineskip,</span><span>        underlay={</span><span>            \filldraw([xshift=5pt,yshift=5pt]frame.north east)rectangle([xshift=-5pt,yshift=-5pt]frame.south west);</span><span>            \draw[yellow!80!brown](frame.north west)--++(4pt,0)</span><span>            --([xshift=4pt]frame.south west)-|++(-4pt,4pt)</span><span>            --([yshift=4pt]frame.south east)|-++(-4pt,-4pt)</span><span>            --([xshift=-4pt]frame.north east)-|++(4pt,-4pt)</span><span>            --([yshift=-4pt]frame.north west)--cycle;</span><span>            \draw[yellow!80!brown]([xshift=-11pt,yshift=-2pt]frame.north)--([xshift=10pt,yshift=-2pt]frame.north west)--++(-8pt,-8pt)</span><span>            --([xshift=2pt,yshift=10pt]frame.south west)--++(8pt,-8pt)--([xshift=-11pt,yshift=2pt]frame.south);</span><span>            \draw[yellow!80!brown]([xshift=11pt,yshift=-2pt]frame.north)--([xshift=-10pt,yshift=-2pt]frame.north east)--++(8pt,-8pt)</span><span>            --([xshift=-2pt,yshift=10pt]frame.south east)--++(-8pt,-8pt)--([xshift=11pt,yshift=2pt]frame.south);</span><span>        },</span><span>    }</span><span>}</span><span></span><span>\begin{tcolorbox}[goldbox]</span><span>        \lipsum[2]</span><span>\end{tcolorbox}</span><span>\begin{tcolorbox}[goldbox,title=My Title]</span><span>        \lipsum[2]</span><span>\end{tcolorbox}</span>
+</pre>
+    </div>
+
+    <div class="share-buttons">
+    <h3>この記事を共有する</h3>
+    <ul>
+        <li>
+        <a id="share-twitter" href="#" class="share-btn twitter" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-x-twitter"></i>
+            <span>Xでシェア</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-facebook" href="#" class="share-btn facebook" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-facebook-f"></i>
+            <span>Facebook</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-line" href="#" class="share-btn line" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-line"></i>
+            <span>LINE</span>
+        </a>
+        </li>
+        <li>
+        <button id="copy-url" class="share-btn copy">
+            <i class="fa-solid fa-link"></i>
+            <span>URLをコピー</span>
+        </button>
+        </li>
+    </ul>
+    </div>
+    </main>
+    <footer>    
+    </footer>
+</body>
+</html>
