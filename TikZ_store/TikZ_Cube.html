@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikZで立方体を書く-kz's Home Page</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../SNSshere.js"></script>
+    <script>
+        $(function(){
+            // id="header-placeholder" の場所に header.html の内容を読み込む
+            $("#header-placeholder").load("../header.html");
+        });
+    </script>
+</head>
+<body>
+    <div id="header-placeholder"></div> 
+
+    <main class="container">
+        <h2>TikZでアナログ時計</h2>
+        <p>TikZ-3dplotで立方体を書きました. 見えない面は自動で破線で書かれるところがポイントです(*'ω'*)</p>
+        <img src="cube.png" alt="立方体" class="responsive-image" style="width: 90%;"/>
+        <h2>コード</h2>
+    <p>以下がコードです. ご自由にお使いください. </p>
+    <div class="code-block">
+    <pre class="code">
+<span>\newcommand{\drawcube}[3][1]{% #1=length, \tdplotsetmaincoords{#2}{#3}</span><span>\tdplotsetmaincoords{#2}{#3}</span><span>\colorlet{maincolor}{cyan}</span><span>\begin{tikzpicture}[</span><span>scale=1.5,</span><span>tdplot_main_coords,</span><span>axis/.style={-stealth},</span><span>mainline/.style={maincolor,very thick, opacity=0.7},</span><span>invisibleline/.style={cyan,densely dashed},</span><span>]</span><span></span><span>\pgfmathsetmacro{\length}{#1}</span><span></span><span>  % axis</span><span>  \draw[axis](0,0,0)--(0.4*\length,0,0)node[pos=1.1]{\scriptsize$x$};</span><span>  \draw[axis](0,0,0)--(0,0.4*\length,0)node[pos=1.1]{\scriptsize$y$};</span><span>  \draw[axis](0,0,0)--(0,0,0.4*\length)node[pos=1.1]{\scriptsize$z$};</span><span></span><span>  % vertices</span><span>  \coordinate (A) at (0, 0, 0);</span><span>  \coordinate (B) at (\length, 0, 0);</span><span>  \coordinate (C) at (\length, \length, 0);</span><span>  \coordinate (D) at (0, \length, 0);</span><span></span><span>  \coordinate (E) at (0, 0, \length);</span><span>  \coordinate (F) at (\length, 0, \length);</span><span>  \coordinate (G) at (\length, \length, \length);</span><span>  \coordinate (H) at (0, \length, \length);</span><span></span><span>  % label</span><span>  \foreach \P in{A,B,C,D,E,F,G,H}</span><span>  \node[maincolor!50!black] at(\P){\P};</span><span></span><span>  % camera vector: ({sin(\tdplotmaintheta)*sin(\tdplotmainphi)},{sin(\tdplotmaintheta)*cos(\tdplotmainphi)},{cos(\tdplotmaintheta)})</span><span>  % inner product</span><span>  \pgfmathparse{-cos(\tdplotmaintheta) >= 0}</span><span>  \pgfmathsetmacro{\ABCDprod}{\pgfmathresult}</span><span></span><span>  \pgfmathparse{sin(\tdplotmaintheta)*sin(\tdplotmainphi) >= 0}</span><span>  \pgfmathsetmacro{\BCFGprod}{\pgfmathresult}</span><span></span><span>  \pgfmathparse{-sin(\tdplotmaintheta)*cos(\tdplotmainphi) >= 0}</span><span>  \pgfmathsetmacro{\CDHGprod}{\pgfmathresult}</span><span></span><span>  \pgfmathparse{-sin(\tdplotmaintheta)*sin(\tdplotmainphi) >= 0}</span><span>  \pgfmathsetmacro{\DAEHprod}{\pgfmathresult}</span><span></span><span>  \pgfmathparse{cos(\tdplotmaintheta) >= 0}</span><span>  \pgfmathsetmacro{\EFGHprod}{\pgfmathresult}</span><span></span><span>  \pgfmathparse{sin(\tdplotmaintheta)*cos(\tdplotmainphi) >= 0}</span><span>  \pgfmathsetmacro{\ABEFprod}{\pgfmathresult}</span><span></span><span>  \tikzset{</span><span>    ABCD/.style={insert path={(A)--(B)--(C)--(D)--cycle}},</span><span>    ABEF/.style={insert path={(A)--(B)--(F)--(E)--cycle}},</span><span>    BCFG/.style={insert path={(B)--(C)--(G)--(F)--cycle}},</span><span>    CDHG/.style={insert path={(C)--(D)--(H)--(G)--cycle}},</span><span>    EFGH/.style={insert path={(E)--(F)--(G)--(H)--cycle}}, </span><span>    DAEH/.style={insert path={(D)--(A)--(E)--(H)--cycle}},</span><span>  }</span><span>  \ifthenelse{\ABCDprod=1 \and \ABEFprod=1 \and \BCFGprod=1}{</span><span>  % Case 1: ABCD, ABEF, BCFG visible.</span><span>  \foreach \face in{ABCD, ABEF, BCFG}</span><span>  \draw[mainline,\face]; </span><span>  \foreach \P in{E,G,D}</span><span>  \draw[invisibleline](H)--(\P);</span><span>  }{</span><span>  \ifthenelse{\ABCDprod=1 \and \ABEFprod=1 \and \DAEHprod=1}{</span><span>  % Case 2: ABCD, ABEF, DAEH visible.</span><span>  \foreach \face in{ABCD, ABEF, DAEH}</span><span>  \draw[mainline,\face]; </span><span>  \foreach \P in{F,H,C}</span><span>  \draw[invisibleline](G)--(\P);</span><span>  }{</span><span>  \ifthenelse{\ABCDprod=1 \and \CDHGprod=1 \and \BCFGprod=1}{</span><span>  % Case 3: ABCD, CDHG, BCFG visible.</span><span>  \foreach \face in{ABCD, CDHG, BCFG}</span><span>  \draw[mainline,\face]; </span><span>  \foreach \P in{A,F,H}</span><span>  \draw[invisibleline](E)--(\P);</span><span>  }{</span><span>  \ifthenelse{\ABCDprod=1 \and \CDHGprod=1 \and \DAEHprod=1}{</span><span>  % Case 4: ABCD, CDHG, DAEH visible.</span><span>  \foreach \face in{ABCD, CDHG, DAEH}</span><span>  \draw[mainline,\face]; </span><span>  \foreach \P in{E,G,B}</span><span>  \draw[invisibleline](F)--(\P);</span><span>  }{</span><span>  \ifthenelse{\EFGHprod=1 \and \ABEFprod=1 \and \BCFGprod=1}{</span><span>  % Case 5: EFGH, ABEF, BCFG visible.</span><span>  \foreach \face in{EFGH, ABEF, BCFG}</span><span>  \draw[mainline,\face]; </span><span>  \foreach \P in{A,H,C}</span><span>  \draw[invisibleline](D)--(\P);</span><span></span><span>  }{</span><span>  \ifthenelse{\EFGHprod=1 \and \ABEFprod=1 \and \DAEHprod=1}{</span><span>  % Case 6: EFGH, ABEF, DAEH visible.</span><span>  \foreach \face in{EFGH, ABEF, DAEH}</span><span>  \draw[mainline,\face]; </span><span>  \foreach \P in{G,B,D}</span><span>  \draw[invisibleline](C)--(\P);</span><span>  }{</span><span>  \ifthenelse{\EFGHprod=1 \and \CDHGprod=1 \and \BCFGprod=1}{</span><span>  % Case 7: EFGH, CDHG, BCFG visible.</span><span>  \foreach \face in{EFGH, CDHG, BCFG}</span><span>  \draw[mainline,\face]; </span><span>  \foreach \P in{E,B,D}</span><span>  \draw[invisibleline](A)--(\P);</span><span>  }{</span><span>  \ifthenelse{\EFGHprod=1 \and \CDHGprod=1 \and \DAEHprod=1}{</span><span>  % Case 8: EFGH, CDHG, DAEH visible.</span><span>  \foreach \face in{EFGH, CDHG, DAEH}</span><span>  \draw[mainline,\face]; </span><span>  \foreach \P in{A,F,C}</span><span>  \draw[invisibleline](B)--(\P);</span><span>  }{</span><span>  }}}}}}}}</span><span>\end{tikzpicture}</span><span>}</span>
+</div>
+    <div class="share-buttons">
+    <h3>この記事を共有する</h3>
+    <ul>
+        <li>
+        <a id="share-twitter" href="#" class="share-btn twitter" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-x-twitter"></i>
+            <span>Xでシェア</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-facebook" href="#" class="share-btn facebook" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-facebook-f"></i>
+            <span>Facebook</span>
+        </a>
+        </li>
+        <li>
+        <a id="share-line" href="#" class="share-btn line" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-line"></i>
+            <span>LINE</span>
+        </a>
+        </li>
+        <li>
+        <button id="copy-url" class="share-btn copy">
+            <i class="fa-solid fa-link"></i>
+            <span>URLをコピー</span>
+        </button>
+        </li>
+    </ul>
+    </div>
+    </main>
+    <footer>    
+    </footer>
+</body>
+</html>
