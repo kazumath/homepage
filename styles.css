@@ -259,9 +259,11 @@ a.card-link {
 }
 
 /* カードレイアウトの説明文部分 */
-.card-text-tax {
+.card-author {
     margin: 0;
-    padding: 1em;
+    text-align: center;
+    padding-bottom: 1em;
+    font-size: 0.6em;
     color: #818181;
 }
 
